@@ -1,49 +1,50 @@
-# Life Expectancy and Annuity Model (Python)
+# Life Expectancy Model
 
-This is a Python-based implementation of a cohort life table and life annuity valuation model. It replicates key actuarial functions, commonly used in CM1/CS1, using simulated mortality data.
+## Overview
 
-## Features
+This is the beginning of a project to create a comprehensive life expectancy model. This Excel version simulates a cohort life table, calculating key actuarial metrics such as mortality rates, survival probabilities, and life expectancy. It sets the foundation for more advanced actuarial analysis in the future.
 
-- Calculates:
-  - Survival probabilities (`pₓ`)
-  - Death counts (`dₓ`)
-  - Person-years lived (`Lₓ`)
-  - Total future person-years (`Tₓ`)
-  - Life expectancy (`eₓ`)
-  - Annuity values (`aₓ`) via recursion:  
-    \[
-    aₓ = 1 + v \cdot pₓ \cdot a_{x+1}
-    \]
+## Model Details
 
-- Exportable to CSV
-- Compatible with substitution of real mortality data
+- **Cohort size**: 100,000 individuals from age 0  
+- **Mortality Rate `qₓ`**: Simulated to gradually increase from age 0 to 100  
+- **Survival Probability `pₓ`**: Calculated as `1 - qₓ`  
+- **Number Alive `lₓ`**: Tracks the number of people alive at age `x`  
+- **Number of Deaths `dₓ`**: Calculated as `lₓ * qₓ`  
+- **Person-years Lived `Lₓ`**: Average number of people alive between ages `x` and `x+1`  
+- **Total Person Years Remaining `Tₓ`**: Sum of `Lₓ` values from age `x` onward  
+- **Life Expectancy `eₓ`**: Calculated as `Tₓ / lₓ`  
+- **Annuity Value `aₓ`**: Present value of receiving £1 per year while alive from age `x` onward, using a constant interest rate
 
-## Tools Used
+## Simulated Data
 
-- Python 3.11
-- `pandas` for DataFrame manipulation
-- Excel (for initial modeling)
+The mortality rate `qₓ` was simulated using a custom formula that gradually increases with age. The structure allows for easy substitution of real data.
 
-## Discount Rate
+## What I Learned
 
-The annuity model assumes a constant annual effective interest rate of 3%:
-
-\[
-v = \frac{1}{1.03}
-\]
-
-## Files
-
-- `mortality_data.csv`: Simulated mortality table input
-- `annuity_model.py`: Python script containing all logic and recursive computation
-- `life_annuity_results.csv`: Output file with all columns including `eₓ` and `aₓ`
+- Gained hands-on experience with fundamental actuarial functions  
+- Applied transferable skills from my economics degree to actuarial tasks  
 
 ## Next Steps
 
-- Incorporate real ONS or insurance data
-- Extend to temporary annuities and assurances
-- Port model to R (CS1-aligned)
+- Build Python version (then R)  
+- Align with CM1/CS1: Incorporate formulas and methodologies from the CS1 and CM1 syllabus  
+- Use real mortality rate data: Replace simulated `qₓ` with real-world data (e.g. from ONS)  
+- Annuity product modelling: Expand to simulate different annuity types and payment structures
 
 ---
 
-This model supports the development of core actuarial programming skills and aligns with the structure of CM1/CS1 exam methodology.
+## Python Expansion
+
+This project now includes a fully coded life table and life annuity model written in Python.
+
+### New Features
+
+- Life expectancy (`eₓ`) and annuity value (`aₓ`) calculated recursively  
+- Present value of a £1 annuity-due built from survival probabilities and discounting  
+- Fully exportable results via CSV  
+
+### Tools Used
+
+- Excel  
+- Python (`pandas`)  

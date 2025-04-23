@@ -1,10 +1,20 @@
-# Life Expectancy Model
+# Cohort Life Expectancy Model
 
-This project is part of my endeavour toward an actuarial career. It’s a survival model built using UK life table data to calculate:
+## Most Recent Update:
+Created a full actuarial life table in Excel. It calculates survival metrics between ages 0-100. 
+The model follows standard actuarial logic and consists of the following columns:
 
-- Probability of survival and death at each age
-- Present value of annuities and life expectancies
-- Core components of CM1 (Actuarial Mathematics) syllabus
+- `qₓ` — Probability of death between age `x` and `x+1`  
+- `pₓ` — Probability of survival to age `x+1`  
+- `lₓ` — Number of people alive at age `x`  
+- `dₓ` — Number of deaths during year `x`  
+- `Lₓ` — Person-years lived between age `x` and `x+1`  
+- `Tₓ` — Total person-years lived after age `x`  
+- `eₓ` — Life expectancy at age `x`
+
+### Simulated Data
+The mortality rate `qₓ` was simulated using a custom formula that gradually increases with age. The goal is to eventually use real data
+
 
 ## Tools Used
 - Excel

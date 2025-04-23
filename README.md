@@ -21,4 +21,6 @@ The mortality rate `qₓ` was simulated using a custom formula that gradually in
 - Python (NumPy, Pandas)
 
 ## Status
-In Progress — building the Excel framework before translating to Python
+In Progress — building the Excel framework before translating to 
+
+## Files

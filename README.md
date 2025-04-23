@@ -1,4 +1,4 @@
-#Life Expectancy Model
+# Life Expectancy Model
 
 ## Overview:
 This is the beginning of a project to create a comprehensive life expectancy model. This excel version simulates a cohort life table, calculating key actuarial metrics such as mortality rates, survival probabilities, and life expectancy. It sets the foundation for more advanced actuarial analysis in the future.

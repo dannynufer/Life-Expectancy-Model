@@ -24,3 +24,4 @@ The mortality rate `qₓ` was simulated using a custom formula that gradually in
 In Progress — building the Excel framework before translating to 
 
 ## Files
+[Download the Excel Model](./Cohort Life Expectancy Model (Excel).xlsx)

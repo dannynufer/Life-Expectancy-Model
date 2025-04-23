@@ -30,5 +30,3 @@ for i in reversed(range(len(df) - 1)):
     df.loc[i, "ax"] = 1 + v * df.loc[i, "px"] * df.loc[i + 1, "ax"]
 
 df.to_csv("life_annuity_results.csv", index=False) # Save the results to a new CSV file
-
-print(df.head()) # print the first 5 rows of the dataframe to check the calculations

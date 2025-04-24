@@ -1,3 +1,11 @@
+
+# Load male and female data from ONSdata folder
+male <- read.csv("ONSdata/male.csv")
+female <- read.csv("ONSdata/female.csv")
+
+
+
+
 # 1. Generate ages from 0 to 100
 age <- 0:100
 

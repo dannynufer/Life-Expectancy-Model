@@ -65,7 +65,6 @@ This is foundational work that serves as a launchpad for future actuarial and da
 
 ## Next Steps
 
-- Use real mortality data (ONS or similar)  
 - Expand annuity modelling to include different product structures  
 - Build interactive dashboards or web-based demos  
 - Integrate with actuarial syllabus content (CM1, CS1)  

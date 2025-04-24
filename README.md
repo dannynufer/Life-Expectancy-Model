@@ -46,9 +46,9 @@ This is foundational work that serves as a launchpad for future actuarial and da
 
 ### R Model (Version 3)
 
-- Vectorized and looped implementation in base R  
-- Focused on learning R for actuarial use  
-- Model includes life expectancy and annuity values  
+- Utilizes ONS life tables for males and females 
+- Calculates annuity values (assuming a fixed interest rate)
+- Visualized gender-based mortality, life expectancy, and annuity differentials 
 - Code: [`r-model/life_expectancy_model.R`](./r-model/life_expectancy_model.R)
 - Outputs: [`CSV Outputs/`](./CSV%20Outputs/)
 

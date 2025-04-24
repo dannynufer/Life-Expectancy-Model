@@ -1,10 +1,150 @@
+install.packages("ggplot2")
+
+library(ggplot2)
+
+# Add gender labels
+male$gender <- "Male"
+female$gender <- "Female"
+
+# Combine into one dataframe
+combined <- rbind(male[, c("age", "qx", "gender")],
+                  female[, c("age", "qx", "gender")])
+
+# Plot mortalit rate by age and gender
+ggplot(combined, aes(x = age, y = qx, color = gender)) +
+  geom_line(linewidth = 1) +
+  labs(title = "Mortality Rate (qₓ) by Age and Gender",
+       x = "Age",
+       y = "Mortality Rate (qₓ)",
+       color = "Gender") +
+  theme_minimal()
+
+ggsave("plots/mortality_by_gender.png", width = 8, height = 6)
+
+library(ggplot2)
+
+# Combine male and female data
+combined_ex <- rbind(male, female)
+
+# Plot life expectancy by age and gender
+ggplot(combined_ex, aes(x = age, y = ex, color = gender)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Life Expectancy (eₓ) by Age and Gender",
+    x = "Age",
+    y = "Life Expectancy (eₓ)",
+    color = "Gender"
+  ) +
+  theme_minimal()
+
+ggsave("plots/life_expectancy_by_gender.png", width = 8, height = 6)
+
+# Plot lx (number alive) by age and gender
+ggplot(combined_ex, aes(x = age, y = lx, color = gender)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Cohort Survivorship (lₓ) by Age and Gender",
+    x = "Age",
+    y = "Number Alive (lₓ)",
+    color = "Gender"
+  ) +
+  theme_minimal()
+
+ggsave("plots/lx_by_gender.png", width = 8, height = 6)
+
+##### Calculate survival probability #######
+
+male$px <- 1 - male$qx
+female$px <- 1 - female$qx
+
+###rebind male and remale datasets with new column #####
+
+male$gender <- "Male"
+female$gender <- "Female"
+combined_px <- rbind(male, female)
+
+# Plot px (survival probability)
+ggplot(combined_px, aes(x = age, y = px, color = gender)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Survival Probability (pₓ) by Age and Gender",
+    x = "Age",
+    y = "Survival Probability (pₓ)",
+    color = "Gender"
+  ) +
+  theme_minimal()
+
+ggsave("plots/px_by_gender.png", width = 8, height = 6)
+
+# Plot dx (number of deaths) by age and gender
+ggplot(combined_ex, aes(x = age, y = dx, color = gender)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Deaths per Age (dₓ) by Gender",
+    x = "Age",
+    y = "Number of Deaths (dₓ)",
+    color = "Gender"
+  ) +
+  theme_minimal()
+
+ggsave("plots/dx_by_gender.png", width = 8, height = 6)
+
+####################################################################
 
 # Load male and female data from ONSdata folder
 male <- read.csv("ONSdata/male.csv")
 female <- read.csv("ONSdata/female.csv")
 
+# Load male and female data from ONSdata folder
+male <- read.csv("ONSdata/male.csv")
+female <- read.csv("ONSdata/female.csv")
 
+######################Present Value Calculation#############################################
 
+# Flat 3% interest rate
+i <- 0.03
+v <- 1 / (1 + i)
+
+# Function to compute annuity at each age
+compute_annuity <- function(lx_vector) {
+  n <- length(lx_vector)
+  ax <- numeric(n)
+  
+  for (x in 1:n) {
+    surv_probs <- lx_vector[x:n] / lx_vector[x]  # survival probabilities from age x
+    discounts <- v ^ (0:(length(surv_probs) - 1))  # discount factors
+    ax[x] <- sum(surv_probs * discounts)  # annuity value
+  }
+  
+  return(ax)
+}
+
+# Apply to both male and female
+male$ax <- compute_annuity(male$lx)
+female$ax <- compute_annuity(female$lx)
+
+# Combine data
+combined_annuity <- rbind(male, female)
+
+# Plot annuity values by age and gender
+ggplot(combined_annuity, aes(x = age, y = ax, color = gender)) +
+  geom_line(size = 1) +
+  labs(
+    title = "Annuity Value by Age and Gender",
+    x = "Age",
+    y = "Annuity Value (ax)",
+    color = "Gender"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title = element_text(size = 14),
+    legend.title = element_text(size = 12)
+  )
+
+ggsave("plots/ax_by_age.png", width = 8, height = 6)
+
+######################################################################
 
 # 1. Generate ages from 0 to 100
 age <- 0:100

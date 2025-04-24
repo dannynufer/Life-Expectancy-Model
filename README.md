@@ -1,50 +1,81 @@
-# Life Expectancy Model
+# Life Expectancy & Annuity Model
 
 ## Overview
 
-This is the beginning of a project to create a comprehensive life expectancy model. This Excel version simulates a cohort life table, calculating key actuarial metrics such as mortality rates, survival probabilities, and life expectancy. It sets the foundation for more advanced actuarial analysis in the future.
-
-## Model Details
-
-- **Cohort size**: 100,000 individuals from age 0  
-- **Mortality Rate `qₓ`**: Simulated to gradually increase from age 0 to 100  
-- **Survival Probability `pₓ`**: Calculated as `1 - qₓ`  
-- **Number Alive `lₓ`**: Tracks the number of people alive at age `x`  
-- **Number of Deaths `dₓ`**: Calculated as `lₓ * qₓ`  
-- **Person-years Lived `Lₓ`**: Average number of people alive between ages `x` and `x+1`  
-- **Total Person Years Remaining `Tₓ`**: Sum of `Lₓ` values from age `x` onward  
-- **Life Expectancy `eₓ`**: Calculated as `Tₓ / lₓ`  
-- **Annuity Value `aₓ`**: Present value of receiving £1 per year while alive from age `x` onward, using a constant interest rate
-
-## Simulated Data
-
-The mortality rate `qₓ` was simulated using a custom formula that gradually increases with age. The structure allows for easy substitution of real data.
-
-## What I Learned
-
-- Gained hands-on experience with fundamental actuarial functions  
-- Applied transferable skills from my economics degree to actuarial tasks  
-
-## Next Steps
-
-- Build Python version (then R)  
-- Align with CM1/CS1: Incorporate formulas and methodologies from the CS1 and CM1 syllabus  
-- Use real mortality rate data: Replace simulated `qₓ` with real-world data (e.g. from ONS)  
-- Annuity product modelling: Expand to simulate different annuity types and payment structures
+This project shows the development of a cohort life table and associated annuity values from **Excel** to **Python** and finally to **R**.
+This is foundational work that serves as a launchpad for future actuarial and data-driven projects.
 
 ---
 
-## Python Expansion
+## Model Summary
 
-This project now includes a fully coded life table and life annuity model written in Python.
+- **Cohort size**: 100,000 individuals from age 0  
+- **Mortality Rate (`qₓ`)**: Simulated to gradually increase with age  
+- **Survival Probability (`pₓ`)**: `1 - qₓ`  
+- **Alive at age x (`lₓ`)**: Survivors at each age  
+- **Deaths (`dₓ`)**: `lₓ * qₓ`  
+- **Person-years (`Lₓ`)**: Approximate average alive between ages `x` and `x+1`  
+- **Cumulative years (`Tₓ`)**: Total years remaining at age `x`  
+- **Life Expectancy (`eₓ`)**: `Tₓ / lₓ`  
+- **Annuity Value (`aₓ`)**: Present value of £1 per year while alive from age `x`, discounted assuming constant interest rate
 
-### New Features
+---
 
-- Life expectancy (`eₓ`) and annuity value (`aₓ`) calculated recursively  
-- Present value of a £1 annuity-due built from survival probabilities and discounting  
-- Fully exportable results via CSV  
+## Versions
 
-### Tools Used
+### Excel Model (Version 1)
 
-- Excel  
-- Python (`pandas`)  
+- Intuitive spreadsheet version of a life table  
+- Step-by-step calculation of each column  
+- Embedded annuity value model
+- Used for practicing the basic logic of the model  
+- Download: [`Excel-model/Life Expectancy and Annuity Model (Excel).xlsx`](./Excel-model/Life%20Expectancy%20and%20Annuity%20Model%20(Excel).xlsx)
+
+---
+
+### Python Model (Version 2)
+
+- Uses `pandas` to compute all life table functions  
+- Recursive logic for annuity value (`aₓ`)  
+- CSV outputs for life expectancy and annuity results  
+- Code: [`Python-model/anuity_model.py`](./Python-model/anuity_model.py)  
+- Plot: [`Python-model/plot_life_annuity.py`](./Python-model/plot_life_annuity.py)  (Not yet complete)
+- Outputs: [`CSV Outputs/`](./CSV%20Outputs/)
+
+---
+
+### R Model (Version 3)
+
+- Vectorized and looped implementation in base R  
+- Focused on learning R for actuarial use  
+- Model includes life expectancy and annuity values  
+- Code: [`r-model/life_expectancy_model.R`](./r-model/life_expectancy_model.R)
+- Outputs: [`CSV Outputs/`](./CSV%20Outputs/)
+
+---
+
+## What I Learned
+
+- Developed a solid understanding of life table mechanics  
+- Practiced recursion, present value concepts, and cohort tracking  
+- Applied tools from my economics degree to actuarial modelling  
+- Gained practical experience in R, Python, and Excel simultaneously  
+
+---
+
+## Next Steps
+
+- Use real mortality data (ONS or similar)  
+- Expand annuity modelling to include different product structures  
+- Build interactive dashboards or web-based demos  
+- Integrate with actuarial syllabus content (CM1, CS1)  
+
+---
+
+## Tools Used
+
+- **Excel**  
+- **Python**: `pandas`, `matplotlib`  
+- **R**: Base R, `ggplot2` (optional for plotting)  
+
+---
